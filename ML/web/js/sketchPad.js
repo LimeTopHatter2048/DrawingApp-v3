@@ -20,18 +20,24 @@ class SketchPad{
     #addEventListeners(){
         this.canvas.onmousedown=(evt)=>{
             const mouse=this.#getMouse(evt);
+            this.path=[mouse];
             this.isDrawing=true;
         }
         this.canvas.onmousemove=(evt)=>{
             if(this.isDrawing){
                 const mouse=this.#getMouse(evt);
                 this.path.push(mouse);
-                console.log(this.path.length);
+                this.#redraw();
             }
         }
         this.canvas.onmouseup=()=>{
             this.isDrawing=false;
         }
+    }
+    #redraw(){
+        this.ctx.clearRect(0,0,
+            this.canvas.width,this.canvas.height);
+        draw.path(this.ctx,this.path);
     }
     #getMouse=(evt)=>{
         const rect=this.canvas.getBoundingClientRect();
