@@ -41,7 +41,13 @@ fileNames.forEach(fn=>{
     }
 });
 
-fs.writeFileSync(constants.SAMPLES, JSON.stringify(samples));
+fs.writeFileSync(constants.SAMPLES, 
+    JSON.stringify(samples)
+);
+
+fs.writeFileSync(constants.SAMPLES_JS, 
+    "const samples="+JSON.stringify(samples)+";"
+);
 
 function generateImageFile(outFile,paths){
     ctx.clearRect(0,0,
