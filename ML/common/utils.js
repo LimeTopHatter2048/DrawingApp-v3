@@ -15,6 +15,21 @@ utils.printProgress=(count,max)=>{
     );
 }
 
+utils.groupBy=(objArray,key)=>{
+    const groups={};
+    for(let obj of objArray){
+        const val=obj[key];
+        // If student ID was just identified 
+        //we don't have any drawings from them yet, 
+        // we initialize it 
+        if(groups[val]==null){
+            groups[val]=[];
+        }
+        groups[val].push(obj);
+    }
+    return groups;
+}
+
 if(typeof module!=='undefined'){
     module.exports=utils;
 }
