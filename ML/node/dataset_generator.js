@@ -1,3 +1,5 @@
+const draw=require('../common/draw.js');
+
 const constants={};
 
 constants.DATA_DIR="../data";
@@ -31,9 +33,21 @@ fileNames.forEach(fn=>{
             constants.JSON_DIR+"/"+id+".json",
             JSON.stringify(paths)
         );
-        
+
+        generateImageFile(
+            constants.IMG_DIR+"/"+id+".png",
+            paths
+        );
+
         id++;
     }
 });
 
 fs.writeFileSync(constants.SAMPLES, JSON.stringify(samples));
+
+function generateImageFile(outFile,paths){
+    draw.paths(ctx,paths);
+
+    const buffer=canvas.toBuffer("image/png");
+    fs.writeFileSync(outFile,buffer);
+}
