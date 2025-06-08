@@ -28,8 +28,11 @@ fs.writeFileSync(constants.FEATURES,
         featureNames,
         samples:samples.map(s=>{
             return {
-                point:s.point,
-                label:s.label
+                id: s.id,
+                point: s.point,
+                label: s.label,
+                student_id: s.student_id,
+                student_name: s.student_name
             };
         })
     })
@@ -37,7 +40,18 @@ fs.writeFileSync(constants.FEATURES,
 
 fs.writeFileSync(constants.FEATURES_JS,
     `const features=
-    ${JSON.stringify({featureNames,samples})}
+    ${JSON.stringify({
+        featureNames,
+        samples:samples.map(s=>{
+            return {
+                id: s.id,
+                point: s.point,
+                label: s.label,
+                student_id: s.student_id,
+                student_name: s.student_name
+            };
+        })
+    })}
     ;`
 );
 
