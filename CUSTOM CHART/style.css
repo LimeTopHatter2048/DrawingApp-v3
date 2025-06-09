@@ -3,3 +3,14 @@ body{
     background-color: limegreen;
     overscroll-behavior: none;
 }
+
+table,td{
+    border: 2px solid whitesmoke;
+    padding: 5px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+thead{
+    font-weight: bold;
+}
