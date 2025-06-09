@@ -51,18 +51,26 @@ class Chart{
         const {ctx,canvas}=this;
         ctx.clearRect(0,0,canvas.width,canvas.height);
 
+        this.#drawAxes();
         ctx.globalAlpha=this.transparency;
         this.#drawSamples();
         ctx.globalAlpha=1;
+    }
+    #drawAxes(){
+        const {ctx,canvas,axesLabels,margin}=this;
+        const {left,right,top,bottom}=this.pixelBounds;
+
+        graphics.drawText(ctx,{
+            text:axesLabels[0],
+            loc:[canvas.width/2,bottom+margin/2],
+            size:margin*0.5
+        });
     }
     #drawSamples(){
         const {ctx,samples,dataBounds,pixelBounds}=this;
         for(const sample of samples){
             const {point}=sample;
-            const pixelLoc=[
-                math.remap(dataBounds.left,dataBounds.right,pixelBounds.left,pixelBounds.right,point[0]),
-                math.remap(dataBounds.top,dataBounds.bottom,pixelBounds.top,pixelBounds.bottom,point[1])
-            ];
+            const pixelLoc=math.remapPoint(dataBounds,pixelBounds,point);
             graphics.drawPoint(ctx,pixelLoc);
         }
     }
