@@ -85,6 +85,31 @@ class Chart{
         ctx.strokeStyle="lightgray";
         ctx.stroke();
         ctx.setLineDash([]);
+
+        const dataMin=math.remapPoint(
+            this.pixelBounds,
+            this.dataBounds,
+            [left,bottom]
+        );
+        graphics.drawText(ctx,{
+            text:math.formatNumber(dataMin[0],2),
+            loc:[left,bottom],
+            size:margin*0.3,
+            align:"left",
+            vAlign:"top"
+        });
+
+        ctx.save();
+        ctx.translate(left,bottom);
+        ctx.rotate(-Math.PI/2);
+        graphics.drawText(ctx,{
+            text:math.formatNumber(dataMin[1],2),
+            loc:[0,0],
+            size:margin*0.3,
+            align:"left",
+            vAlign:"bottom"
+        });
+        ctx.restore();
     }
     #drawSamples(){
         const {ctx,samples,dataBounds,pixelBounds}=this;
